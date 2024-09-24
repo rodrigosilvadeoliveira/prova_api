@@ -2,7 +2,7 @@ import { getAuthToken } from '../support/auth';
 
 describe('Geração do token de acesso', () => {
   let authToken = '';
-  const sellerId = 'your-seller-id-uuidv4';
+  const sellerId = 'uuidv4';
 
   before(() => {
     
@@ -35,8 +35,11 @@ describe('Geração do token de acesso', () => {
           cy.log('Falha na tokenização do cartão.');
           cy.log(response.body);
         }
+        const numberToken = response.body.number_token;
+        cy.log('Number Token gerado: ' + numberToken);
         expect(response.status).to.eq(200);
-        expect(response.body).to.have.property('card_token'); 
+        expect(response.body).to.have.property('card_token');
+        expect(response.body).to.have.property('number_token').and.to.be.a('number'); 
       });
     });
   });

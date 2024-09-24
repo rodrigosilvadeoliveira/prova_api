@@ -19,8 +19,13 @@ describe('API Test', () => {
       },
       form: true 
     }).then((response) => {
+      const token_type = response.body.token_type;
+        cy.log('Number Token gerado: ' + token_type);
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property('access_token');
+      expect(response.body).to.have.property('expires_in').and.to.be.a('number');
+      expect(response.body).to.have.property('token_type').and.to.be.a('string');
+      expect(response.body).to.have.property('scope').and.to.be.a('string');
     });
   });
 });

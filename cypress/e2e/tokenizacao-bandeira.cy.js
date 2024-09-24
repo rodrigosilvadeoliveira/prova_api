@@ -26,13 +26,13 @@ describe('API Test with Bearer Token and Card Tokenization', () => {
       },
       body: {
         customer_id: "customer_45678900",
-        email: "tokenizacao_bandeira@getnet.com.br",
-        card_brand: "Mastercard",
+        card_pan: "4622943120000493",
         card_pan_source: "ON_FILE",
-        card_pan: "5204731600014784",
-        security_code: "226",
+        card_brand: "Mastercard",
+        expiration_year: "2023",
         expiration_month: "12",
-        expiration_year: "2023"
+        security_code: "1234",
+        email: "tokenizacao_bandeira@getnet.com.br"
       },
       failOnStatusCode: false
     }).then((response) => {
@@ -46,6 +46,8 @@ describe('API Test with Bearer Token and Card Tokenization', () => {
         cy.log('Status da tokenização: ' + status);
       }
       expect(response.status).to.eq(200);
+      expect(response.body).to.have.property('networkTokenId').and.to.be.a('string');
+      expect(response.body).to.have.property('status').and.to.be.a('string');
     });
   });
   it('Geração de criptograma do cartão', () => {
@@ -59,19 +61,25 @@ describe('API Test with Bearer Token and Card Tokenization', () => {
       method: 'POST',
       url: `/v1/some/endpoint/v1/tokenization/crypt`,
       headers: {
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': `Bearer ${authToken}`,
       },
       body: {
         network_token_id: networkTokenId,
-        transaction_type: "CIT ou MIT",
-        cryptogram_type: "VISA_TAVV ou MC_DSRP_LONG",
+        transaction_type: "MIT",
+        cryptogram_type: "MC_DSRP_LONG",
         amount: 100,
-        customer_id: "customer_45678900, 123.456.789-00 ou 12345678900",
+        customer_id: "customer_45678900",
         email: "tokenizacao_bandeira@getnet.com.br",
-        card_brand: "VISA, MASTERCARD"
+        card_brand: "MASTERCARD"
       }
     }).then((response) => {
       expect(response.status).to.eq(200);
+      expect(response.body).to.have.property('cryptogram').and.to.be.a('string');
+      expect(response.body).to.have.property('token_pan_card').and.to.be.a('number');
+      expect(response.body).to.have.property('token_expiration_month').and.to.be.a('number');
+      expect(response.body).to.have.property('token_expiration_year').and.to.be.a('number');
+      expect(response.body).to.have.property('token_status').and.to.be.a('string');
     });
   });
 });
