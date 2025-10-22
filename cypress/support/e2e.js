@@ -18,3 +18,8 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+afterEach(() => {
+    if (Cypress.env('takeScreenshots')) {
+      cy.screenshot();
+    }
+  });

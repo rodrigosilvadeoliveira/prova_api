@@ -2,33 +2,39 @@
     "usuarios": [
       {
         "name": "Peter Jason Quill",
-        "email": "peter.quill@alura.com.br",
-        "password": "Senha12345"
+        "email": "peter.quill@teste.com.br",
+        "password": "Senha12345",
+        "administrador": "true"
       },
       {
         "name": "Gamora Zen Whoberi Ben Titan",
-        "email": "gamora@alura.com",
-        "password": "Senha123456"
+        "email": "gamora@teste.com",
+        "password": "Senha123456",
+        "administrador": "true"
       },
       {
         "name": "Rocket Raccoon",
-        "email": "rocket.raccoon@alura.com",
-        "password": "Senha1234567"
+        "email": "rocket.raccoon@teste.com",
+        "password": "Senha1234567",
+        "administrador": "true"
       },
       {
         "name": "Groot",
-        "email": "groot@alura.com.br",
-        "password": "Senha12345678"
+        "email": "groot@teste.com.br",
+        "password": "Senha12345678",
+        "administrador": "true"
       },
       {
         "name": "Drax",
-        "email": "drax@alura.com",
-        "password": "Senha123456789"
+        "email": "drax@teste.com",
+        "password": "Senha123456789",
+        "administrador": "true"
       },
       {
         "name": "Yondu Udonta",
-        "email": "youndu@alura.com.br",
-        "password": "Senha1234567890"
+        "email": "youndu@teste.com.br",
+        "password": "Senha1234567890",
+        "administrador": "true"
       }
     ]
   }
